@@ -20,13 +20,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Catálogo de Aplicaciones - Curso Dev",
-  description: "Catálogo de aplicaciones para el curso de desarrollo con convertidor de unidades PWA.",
+  title: "Desarrollo Movil Mon24",
+  description: "Catálogo de aplicaciones para Desarrollo Movil Mon24",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Dev Catalog",
+    title: "Desarrollo Movil Mon24",
   },
 };
 

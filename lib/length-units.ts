@@ -14,13 +14,6 @@ export const LENGTH_UNITS: Record<LengthUnitKey, LengthUnitInfo> = {
   mm: { key: 'mm', name: 'Milímetros', symbol: 'mm', ratioToMeter: 0.001 },
 };
 
-export const COMMON_PRESETS: Array<{ from: LengthUnitKey; to: LengthUnitKey; label: string; formula: string }> = [
-  { from: 'km', to: 'm', label: 'km ➔ m', formula: '1 km = 1,000 m' },
-  { from: 'm', to: 'km', label: 'm ➔ km', formula: '1,000 m = 1 km' },
-  { from: 'cm', to: 'mm', label: 'cm ➔ mm', formula: '1 cm = 10 mm' },
-  { from: 'mm', to: 'cm', label: 'mm ➔ cm', formula: '10 mm = 1 cm' },
-];
-
 export interface ValidationResult {
   isValid: boolean;
   errorMessage?: string;
@@ -29,6 +22,7 @@ export interface ValidationResult {
 
 /**
  * Validates text input to ensure only numeric non-negative numbers are entered.
+ * Supports numbers with thousands separators like 1,000
  */
 export function validateLengthInput(input: string): ValidationResult {
   const trimmed = input.trim();
@@ -37,7 +31,7 @@ export function validateLengthInput(input: string): ValidationResult {
     return { isValid: true, numericValue: undefined };
   }
 
-  // Check for letters or illegal characters
+  // Check for letters or illegal characters (excluding comma and dot)
   if (/[a-zA-Z]/i.test(trimmed)) {
     return {
       isValid: false,
@@ -53,16 +47,18 @@ export function validateLengthInput(input: string): ValidationResult {
     };
   }
 
-  // Match decimal pattern strictly (only digits and optionally one dot)
-  const isStrictNumeric = /^\d*\.?\d*$/.test(trimmed);
+  // Sanitize commas used as thousands separators for parsing
+  const cleanInput = trimmed.replace(/,/g, '');
+
+  const isStrictNumeric = /^\d*\.?\d*$/.test(cleanInput);
   if (!isStrictNumeric) {
     return {
       isValid: false,
-      errorMessage: 'Formato numérico inválido. Verifique que no haya múltiples puntos ni símbolos.',
+      errorMessage: 'Formato numérico inválido. Verifique los puntos y comas ingresados.',
     };
   }
 
-  const num = parseFloat(trimmed);
+  const num = parseFloat(cleanInput);
   if (isNaN(num)) {
     return {
       isValid: false,
@@ -87,15 +83,14 @@ export function convertLength(value: number, from: LengthUnitKey, to: LengthUnit
 }
 
 /**
- * Formats conversion result neatly (e.g. 1000 or 0.001 with up to 6 decimals, removing trailing zeros)
+ * Formats conversion result using comma (,) as thousands separator (e.g., 1,000)
  */
 export function formatResult(val: number): string {
   if (val === 0) return '0';
-  
-  const formatted = val.toLocaleString('es-ES', {
+
+  // Format with comma (,) for thousands separator as requested (e.g. 1,000)
+  return val.toLocaleString('en-US', {
     maximumFractionDigits: 6,
     useGrouping: true,
   });
-
-  return formatted;
 }

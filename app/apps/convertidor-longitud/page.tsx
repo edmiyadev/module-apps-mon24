@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Navbar } from '@/components/Navbar';
 import { LengthConverter } from '@/components/LengthConverter';
 import { PwaRegister } from '@/components/PwaRegister';
@@ -8,15 +9,16 @@ export default function LengthConverterPage() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
       <PwaRegister />
-      <Navbar showBack={true} currentTitle="Convertidor de Unidades de Longitud" />
+      <Navbar showBack={true} currentTitle="Convertidor de Longitud" />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 flex items-center justify-center">
         <LengthConverter />
       </main>
 
-      <footer className="glass-panel border-t border-slate-800/80 py-6 mt-16 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4">
-          <p>Convertidor de Longitud • Módulo 1 • Aplicación PWA</p>
+      <footer className="border-t border-slate-900 py-4 text-center text-xs text-slate-500">
+        <div className="max-w-4xl mx-auto px-4 space-y-1">
+          <p className="font-semibold text-slate-400">Edward Minaya - 100434130</p>
+          <p className="text-slate-600">Desarrollo movil Mon24</p>
         </div>
       </footer>
     </div>
