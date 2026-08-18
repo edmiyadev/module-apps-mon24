@@ -23,5 +23,13 @@ export const COURSE_APPS: CourseApp[] = [
     iconName: 'StickyNote',
     href: '/apps/notas-rapidas',
     status: 'available',
+  },
+  {
+    id: 'encuesta-so',
+    title: 'Encuesta de Sistema Operativo',
+    description: 'Participa en la encuesta sobre tu sistema operativo favorito y visualiza los resultados.',
+    iconName: 'Vote',
+    href: '/apps/encuesta-so',
+    status: 'available',
   }
 ];
