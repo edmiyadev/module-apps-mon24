@@ -10,7 +10,10 @@ interface BeforeInstallPromptEvent extends Event {
 
 export function PwaInstaller() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState<boolean>(false);
+  const [isInstalled, setIsInstalled] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(display-mode: standalone)').matches;
+  });
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
@@ -25,10 +28,6 @@ export function PwaInstaller() {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     window.addEventListener('appinstalled', handleAppInstalled);
-
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      setIsInstalled(true);
-    }
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);

@@ -15,5 +15,13 @@ export const COURSE_APPS: CourseApp[] = [
     iconName: 'Ruler',
     href: '/apps/convertidor-longitud',
     status: 'available',
+  },
+  {
+    id: 'notas-rapidas',
+    title: 'Notas Rápidas',
+    description: 'Toma, organiza y guarda notas de forma rápida y sencilla con almacenamiento local.',
+    iconName: 'StickyNote',
+    href: '/apps/notas-rapidas',
+    status: 'available',
   }
 ];

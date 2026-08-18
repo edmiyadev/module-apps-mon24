@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { CourseApp } from '@/lib/apps-registry';
-import { Ruler, Calculator, CheckSquare, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Ruler, Calculator, CheckSquare, ArrowUpRight, Sparkles, StickyNote } from 'lucide-react';
 
 interface AppCardProps {
   app: CourseApp;
@@ -14,6 +14,8 @@ export function AppCard({ app }: AppCardProps) {
     switch (app.iconName) {
       case 'Ruler':
         return <Ruler className="w-5 h-5 text-indigo-400" />;
+      case 'StickyNote':
+        return <StickyNote className="w-5 h-5 text-amber-400" />;
       case 'Calculator':
         return <Calculator className="w-5 h-5 text-purple-400" />;
       case 'CheckSquare':

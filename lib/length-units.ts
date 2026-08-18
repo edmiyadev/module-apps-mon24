@@ -40,7 +40,7 @@ export function validateLengthInput(input: string): ValidationResult {
   }
 
   // Check for negative numbers or math operators
-  if (trimmed.startsWith('-') || /[+\-*/=]/!?.test(trimmed)) {
+  if (trimmed.startsWith('-') || /[+\-*/=]/.test(trimmed)) {
     return {
       isValid: false,
       errorMessage: 'Por favor, ingrese un número entero o decimal positivo válido.',

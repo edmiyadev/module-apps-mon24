@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useId, useEffect } from 'react';
+import React, { useState, useId } from 'react';
 import {
   LengthUnitKey,
   LENGTH_UNITS,
@@ -32,16 +32,6 @@ export function LengthConverter() {
 
   // Available target units (excluding the source unit)
   const targetUnitOptions = allUnits.filter((u) => u.key !== fromUnit);
-
-  // Ensure toUnit is never equal to fromUnit
-  useEffect(() => {
-    if (fromUnit === toUnit) {
-      const nextAvailable = targetUnitOptions[0]?.key;
-      if (nextAvailable) {
-        setToUnit(nextAvailable);
-      }
-    }
-  }, [fromUnit, toUnit, targetUnitOptions]);
 
   const validation = validateLengthInput(inputValue);
   const numericVal = validation.numericValue;
